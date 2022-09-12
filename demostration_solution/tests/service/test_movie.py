@@ -9,7 +9,7 @@ from demostration_solution.setup_db import db
 
 @pytest.fixture()
 def movie_dao():
-    movie_dao = MovieDAO(db.session)
+    movie_dao = MovieDAO(None)
 
     tor = Movie(id = 1,title = "tor", description = "marvel",trailer = "whatch youtube", year = 2016,rating = "16+")
     spider_man = Movie(id = 2,title = "spider_man", description = "film",trailer = "whatch youtube2", year = 2017,rating = "17+")
@@ -23,9 +23,9 @@ def movie_dao():
     return movie_dao
 
 
-class TestUserService:
+class TestMovieService:
     @pytest.fixture(autouse=True)
-    def movie_dao(self,movie_dao):
+    def movie_service(self,movie_dao):
         self.movie_service = MovieService(dao = movie_dao)
 
     def test_get_one(self):
